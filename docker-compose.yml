@@ -97,14 +97,6 @@ services:
       - ./docker/nginx.conf:/etc/nginx/templates/default.conf.template
     ports:
       - 3000
-    networks:
-      - dokploy-network  
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.<unique-name>.rule=Host(`forms.bys.academy`)"
-      - "traefik.http.routers.<unique-name>.entrypoints=websecure"
-      - "traefik.http.routers.<unique-name>.tls.certResolver=letsencrypt"
-      - "traefik.http.services.<unique-name>.loadbalancer.server.port=3000"  
     depends_on:
       api:
         condition: service_started
@@ -114,7 +106,3 @@ services:
 volumes:
   postgres-data:
   opnform_storage:
-
-networks:
-  dokploy-network:
-    external: true
