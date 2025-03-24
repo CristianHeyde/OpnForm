@@ -97,6 +97,8 @@ services:
       - ./docker/nginx.conf:/etc/nginx/templates/default.conf.template
     ports:
       - 3000
+    networks:
+      - dokploy-network  
     depends_on:
       api:
         condition: service_started
@@ -106,3 +108,7 @@ services:
 volumes:
   postgres-data:
   opnform_storage:
+
+networks:
+  dokploy-network:
+    external: true
